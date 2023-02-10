@@ -1,0 +1,10 @@
+{
+    "vitalOrange": {
+        "backgroundColor": "#FF7300",
+        "color": "#fff"
+    },
+    "sakuraPink": {
+        "backgroundColor": "#FFC0CB",
+        "color": "#fff"
+    }
+}

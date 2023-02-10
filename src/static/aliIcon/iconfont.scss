@@ -1,0 +1,83 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 3884153 */
+  src: url('@/static/aliIcon/iconfont.woff2') format('woff2'),
+       url('@/static/aliIcon/iconfont.woff') format('woff'),
+       url('@/static/aliIcon/iconfont.ttf') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-chat-fill:before {
+  content: "\e992";
+}
+
+.icon-chat-line:before {
+  content: "\e993";
+}
+
+.icon-home-line:before {
+  content: "\e7c6";
+}
+
+.icon-home-fill:before {
+  content: "\e867";
+}
+
+.icon-label-line:before {
+  content: "\e662";
+}
+
+.icon-label-fill:before {
+  content: "\e679";
+}
+
+.icon-mine-line:before {
+  content: "\e661";
+}
+
+.icon-mine-fill:before {
+  content: "\e6a6";
+}
+
+.icon-label2-line:before {
+  content: "\ed3e";
+}
+
+.icon-label2-fill:before {
+  content: "\ed40";
+}
+
+.icon-xihuan:before {
+  content: "\e61e";
+}
+
+.icon-shouye-zhihui:before {
+  content: "\e61f";
+}
+
+.icon-gerenzhongxin-zhihui:before {
+  content: "\e620";
+}
+
+.icon-allow-left:before {
+  content: "\e621";
+}
+
+.icon-guanzhu-zhihui:before {
+  content: "\e622";
+}
+
+.icon-guanbi:before {
+  content: "\e623";
+}
+
+.icon-weibiaoti--copy:before {
+  content: "\e600";
+}
+
