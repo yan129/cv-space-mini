@@ -3,9 +3,10 @@
 		:class="{ 'tui-bar-line': opacity > 0.85 && splitLine, 'tui-navbar-fixed': isFixed, 'tui-backdrop__filter': backdropFilter && dropDownOpacity > 0  }"
 		:style="{ height: height + 'px', backgroundColor: `rgba(${background},${opacity})`, opacity: dropDownOpacity, zIndex: isFixed ? zIndex : 'auto' }">
 		<view class="tui-status-bar" :style="{ height: statusBarHeight + 'px' }" v-if="isImmersive"></view>
-		<view class="tui-header-icon" v-if="!arrowHidden">
-			<tui-icon name="arrowleft" :size="arrowIconSize" :color="opacity > 0.85 ? '#fff' : '#333'" @click="backPage()"></tui-icon>
-		</view>
+		<!-- <view class="tui-header-icon" v-if="!arrowHidden"> -->
+			<!-- <tui-icon name="arrowleft" :size="arrowIconSize" :color="opacity > 0.85 ? '#fff' : '#333'" @click="backPage()"></tui-icon> -->
+			<icon class="iconfont icon-arrowleft" :style="{color: '#fff', fontSize: arrowIconSize + 'px'}" v-if="!arrowHidden" @click="backPage()"></icon>
+		<!-- </view> -->
 		<view class="tui-navigation_bar-title"
 			:style="{ opacity: transparent || opacity >= maxOpacity ? 1 : opacity, color: color, fontSize: fontSize, paddingTop: top - statusBarHeight + 'px' }"
 			v-if="title && !isCustom">
@@ -23,7 +24,7 @@
 			// 返回箭头图标大小
 			arrowIconSize: {
 				type: Number,
-				default: 26
+				default: 28
 			},
 			// 隐藏返回箭头
 			arrowHidden: {
@@ -221,7 +222,8 @@
 	};
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+	@import '../../../static/aliIcon/iconfont.scss';
 	.tui-navigation-bar {
 		width: 100%;
 		transition: opacity 0.4s;
@@ -244,17 +246,39 @@
 		width: 100%;
 	}
 
-	.tui-header-icon {
-		position: absolute;
-		display: inline-block;
-		width: 32px;
-		height: 32px;
-		line-height: 32px;
-		margin: 4px 6px 0px;
-		text-align: center;
+	// .tui-header-icon {
+	// 	position: absolute;
+	// 	width: 32px;
+    // height: 40px;
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
+    // margin-left: 10px;
+		// display: flex;
+    	// height: 60%;
+    	// align-items: center;
+		// margin: 0px 6px 0px;
+		/* display: inline-block;
+		width: 36px;
+		height: 36px;
+		line-height: 36px;
+		margin: 6px 6px 0px;
+		text-align: center; */
 		/* #ifndef H5 */
-		cursor: pointer;
+		/* cursor: pointer; */
 		/* #endif */
+		
+	// }
+	.icon-arrowleft {
+		position: absolute;
+		font-size: 26px;
+		display: inline-block;
+		width: 72rpx;
+		height: 72rpx;
+		line-height: 72rpx;
+		text-align: center;
+		margin-top: 16rpx;
+		margin-left: 30rpx;
 	}
 
 	.tui-navigation_bar-title {

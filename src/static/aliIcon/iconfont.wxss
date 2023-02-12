@@ -12,6 +12,42 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-arrowleft:before {
+  content: "\e68b";
+}
+
+.icon-arrowright:before {
+  content: "\e68c";
+}
+
+.icon-settings:before {
+  content: "\e8cb";
+}
+
+.icon-setting1:before {
+  content: "\e691";
+}
+
+.icon-Setting:before {
+  content: "\e6a4";
+}
+
+.icon-setting2:before {
+  content: "\e61e";
+}
+
+.icon-shezhi:before {
+  content: "\e6f6";
+}
+
+.icon-feedback:before {
+  content: "\e797";
+}
+
+.icon-about:before {
+  content: "\e645";
+}
+
 .icon-chat-fill:before {
   content: "\e992";
 }
@@ -50,30 +86,6 @@
 
 .icon-label2-fill:before {
   content: "\ed40";
-}
-
-.icon-xihuan:before {
-  content: "\e61e";
-}
-
-.icon-shouye-zhihui:before {
-  content: "\e61f";
-}
-
-.icon-gerenzhongxin-zhihui:before {
-  content: "\e620";
-}
-
-.icon-allow-left:before {
-  content: "\e621";
-}
-
-.icon-guanzhu-zhihui:before {
-  content: "\e622";
-}
-
-.icon-guanbi:before {
-  content: "\e623";
 }
 
 .icon-weibiaoti--copy:before {

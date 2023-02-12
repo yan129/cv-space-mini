@@ -32,13 +32,14 @@
             </view>
             <view class="statistics-box">
                 <view class="statistics-list-cards">
-
+                    <view class="card-wrapper" v-for="(item, index) in statisticsListCard" :key="index">
+                        <view class="card-number">{{ item.number }}</view>
+                        <view class="card-text">{{ item.text }}</view>
+                    </view>
                 </view>
-                <!-- <view class="follow-box">关注 2</view>
-                <view class="fans-box">粉丝 4</view> -->
             </view>
         </view>
-        <view class="mine-content-container" :style="{ height: (contentHeight * (1 - 0.35)) + 'px'}">
+        <view class="mine-content-container" :style="{ height: (contentHeight * (1 - 0.35)) + 'px', display: 'table'}">
             <view class="list-cards">
                 <view class="selector-card" 
                     v-for="(item, index) in selectorCard" 
@@ -48,8 +49,27 @@
                     <text class="subtitle">{{ item.subText }}</text>
                 </view>
             </view>
+            <view class="list-box">
+                <view class="list-item" v-for="(item, index) in listItem" :key="index" @click="callItem(item)">
+                    <icon :class="['iconfont', item.icon]"></icon>
+                    <text class="text">{{ item.text }}</text>
+                    <icon class="iconfont icon-arrowright"></icon>
+                </view>
+            </view>
+            <view class="more-container">
+                <view class="title">
+                    <view class="color-block" :style="{ backgroundColor: themeStyles.themeBackgroundColor}"></view>
+                    <text>更多功能</text>
+                </view>
+                <view class="more-wrapper">
+                    <view class="more-list-item" v-for="(item, index) in moreListItem" :key="index">
+                        <icon :class="['iconfont', item.icon]"></icon>
+                        <text class="item-text">{{ item.text }}</text>
+                    </view>
+                </view>
+            </view>
         </view>
-        <view v-for="i in 50" :key="i">{{i}}</view>
+        
         <view class="tabbar-container">
 			<tab-bar></tab-bar>
 		</view>
@@ -77,7 +97,11 @@ export default {
                 },
                 likes: {
                     number: 0,
-                    text: '月获赞'
+                    text: '获赞'
+                },
+                footmark: {
+                    number: 0,
+                    text: '浏览'
                 }
             },
             // 卡片列表
@@ -103,6 +127,47 @@ export default {
                     png: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAECUlEQVRogdWZzW8bRRjGn3fWTexs0tiu1KZ2G1JCUcSBA2lsirgjwA6c+N/4FzhQgp1Ajz3aCUKA1EggKLRNmob4K9jgxN55OJBG/XB2x7vjhPwkH7zz7rzPMzOeLwtGQPPOYoIXYq8BTEKDBBtjVL9PflI5tJ0rZrvC3S/echhzFkBOAwAEEEiiJ3QAbNrOp2xXODYxOQ9gekDRlWYpl7Gdz6qBdik3SeJEkRrIbny+KDZzWjXQE1z1KxfAfSPjXLeZ05qBv9byLohsUByJ7M7dtx1bea0Z0Jq+rX+MYDzei8/aymvFQKuUT2jimmk8NbLN8vtWZkArBjzQWDwAQBCjPrxhI3dkA41v3o0Lgsf+Kwiy7ZX8WNT8kQ2Ip0OP577Duaj5Ixmo3V0a95v3gyCRqX21NB5FQ2gDrW9vJ9ShijyOlaNutFZuJ8K+H7gqcu1D1dJ1lx5dUXABcQm6ACK13AC6ADqEdByw42nppJYrbQlQ+ELxzpfvjcVifddRmKCmCxFXBC5of9NnSE+ANiEdITsepNMb/6cz88GP3rMAAYB6OXdJEZcJXDkjocPQE8ieBvbSxUpN9ldzE57GOxjB1nqkCLrJv9tV5Wm8jvMmHgCIeH18clYBPH/ij1AKcesHmtOFcUXBk7OWERrhY5UurD8Vwe5ZaxkWErupwsbe8TrQ+Dq/AOHMWYoyRYTbycL6z8BLC1mjtHQTkOF3lqcIgUfpYvXXZ99fWajrpdy8AFbPrbYQwYNkofrHC88GBdZWcnNKYe5UVBlCyC/pYmXr5ecnbpWapdx1AvOjlWWGAjeni+tPB5X57vXqpXxWwJujkWVEn8RmerlaOykgcDvdWF2agZYFu7qM6NLDZvrTassvKHAlTn28vqPJ+/Z0mUHl/BQkHjA8kSlHIh++hyWmQZM4s72QHnhZO1II76JJnOlmbiqCllBo0CinqYF4BC2hEIidHqiVckYV2YaGvR5oQCmciQEA2F/NTQTFBA8hz2wsjgICk0ExgQYoEljJqNBaAhsv0IAArh05YdDRDLRKt6KOfx59wiERe4BUYYdPn8SDVLF6L1Ws3iPxG4H+0LUQTtAP2fdKhQoyZPt1BdhKFquPnn+YXq4+BPDwv92tngXE+F71wPN8/0/zNeARB0b/xol0QDxJFSuP/cKODiRbzXI+A/AaicBpMh7TXb9y/x7QFxpQvTZOms5EWqK5kyxWhrqaSRYq2wC2m+V8hpoZyOD6CWxPffR9z6+u4PNA6VZS4LxJ8Li1SNQVuJNcXrdyHdMs5zMkr+K51ZfEfr/b/uHyZ/c9n1eDDRwnWVtM0HMcB97BxeJ3vq0SlmY5P+V5vDTm6D+nChsdk3eEDD/L/R8453ejwL+YPGPSZcnnTwAAAABJRU5ErkJggg==',
                 }
             },
+            listItem: [
+                // {
+                //     icon: 'icon-home-line',
+                //     text: '创作中心',
+                //     callPopup: false,
+                //     navigateUrl: './creation'
+                // },
+                // {
+                //     icon: 'icon-home-line',
+                //     text: '专题管理',
+                //     callPopup: false,
+                //     navigateUrl: './theme'
+                // },
+                {
+                    icon: 'icon-setting2',
+                    text: '历史足迹',
+                    callPopup: true
+                },
+                {
+                    icon: 'icon-setting2',
+                    text: '意见反馈',
+                    callPopup: false,
+                    navigateUrl: ''
+                },
+                {
+                    icon: 'icon-setting2',
+                    text: '设置',
+                    callPopup: false,
+                    path: '../../pagesMine/setting/setting'
+                },
+            ],
+            moreListItem: [
+                {
+                    icon: 'icon-feedback',
+                    text: '意见反馈',
+                },
+                {
+                    icon: 'icon-about',
+                    text: '关于我们',
+                },
+            ],
         }
     },
     onReady() {
@@ -157,6 +222,14 @@ export default {
                 }
             });
         },
+        // 页面跳转
+        callItem(item) {
+            if (item.callPopup){
+
+            }else{
+                uni.navigateTo({url: item.path})
+            }
+        }
     }
 };
 </script>
@@ -347,36 +420,41 @@ export default {
         }
 
         .statistics-box {
-            width: 100%;
+            width: 90%;
             height: 120rpx;
             position: absolute;
             bottom: 0;
+            left: 5%;
             .statistics-list-cards {
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
-                padding: 30rpx;
+                margin: 20rpx;
+                font-size: 24rpx;
+                color: rgba(255, 255, 255, 0.7);
+                .card-wrapper {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-direction: column;
+                    width: 22%;
+                    height: 80rpx;
+                }
+                .card-number {
+                    line-height: 40rpx;
+                    font-weight: 700;
+                }
+                .card-text {
+                    width: 60%;
+                    text-align: center;
+                    // line-height: 40rpx;
+                    // background: rgba(255, 34, 255, 0.13);
+                    // height: 40rpx;
+                    // border-radius: 0 0 18rpx 18rpx;
+                    // font-size: 20rpx;
+                }
             }
         }
-
-        // .baseinf
-            //     .other-operation{
-            //         margin-top: 20rpx;
-            //         font-size: 20rpx;
-            //         color: #333;
-            //         .follow-box, .fans-box {
-            //             margin-left: 30rpx;
-            //             display: inline-block;
-            //             border-radius: 12rpx;
-            //             padding: 2rpx 10rpx;
-            //             background-color: rgba(255, 255, 255, .3);
-            //         }
-            //         .follow-box {
-            //             margin-left: 0rpx;
-            //         }
-            //     }
-            // }
-        // }
     }
     .mine-content-container {
         .list-cards {
@@ -407,6 +485,91 @@ export default {
                     margin-top: 4rpx;
                     color: #9e9e9e;
                     font-size: 24rpx;
+                }
+            }
+        }
+        .list-box{
+            border-top: 30rpx solid #f2f2f2;
+            color: $uni-text-color;
+            .list-item{
+                height: 120rpx;
+                line-height: 120rpx;
+                padding-left: 30rpx;
+                padding-right: 30rpx;
+                box-sizing: border-box;
+                color: $uni-text-color;
+                .iconfont{
+                    width: auto;
+                    font-size: 50rpx;
+                }
+                .text{
+                    height: 119rpx;
+                    width: 100%;
+                    position: absolute;
+                    margin-left: 26rpx;
+                    border-bottom: 1rpx solid #F7F7F7;
+                }
+                .icon-arrowright{
+                    right: 20rpx;
+                    position: absolute;
+                    font-size: 48rpx;
+                    color: #ddd;
+                }
+                &:last-child .text{
+                    height: 120rpx;
+                    border-bottom: none !important;
+                }
+                .icon-setting2 {
+                    color: #858EBD; //#FF9325
+                }
+            }
+        }
+        .more-container{
+            border-top: 30rpx solid #f2f2f2;
+            padding-left: 30rpx;
+            padding-right: 30rpx;
+            padding-bottom: 30rpx;
+            color: #333;
+            .title{
+                width: 100%;
+                height: 100rpx;
+                line-height: 100rpx;
+                display: flex;
+                align-items: center;
+                .color-block {
+                    display: inline-block;
+                    width: 8rpx;
+                    height: 50rpx;
+                    // background-color: #DE5678;
+                    margin-right: 20rpx;
+                    margin-left: 10rpx;
+                }
+            }
+            .more-wrapper {
+                display: flex;
+                flex-wrap: wrap; // 换行
+                align-items: flex-start;
+                .more-list-item {
+                    margin-bottom: 30rpx;
+                    width: 25%;
+                    height: 120rpx;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 28rpx;
+                    .iconfont {
+                        font-size: 50rpx;
+                    }
+                    .item-text {
+                        margin-top: 10rpx;
+                    }
+                    .icon-feedback {
+                        color: #5BBCFF;
+                    }
+                    .icon-about {
+                        color: #F4BA62;
+                    }
                 }
             }
         }
