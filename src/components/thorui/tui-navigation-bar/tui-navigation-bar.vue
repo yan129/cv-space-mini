@@ -3,14 +3,14 @@
 		:class="{ 'tui-bar-line': opacity > 0.85 && splitLine, 'tui-navbar-fixed': isFixed, 'tui-backdrop__filter': backdropFilter && dropDownOpacity > 0  }"
 		:style="{ height: height + 'px', backgroundColor: `rgba(${background},${opacity})`, opacity: dropDownOpacity, zIndex: isFixed ? zIndex : 'auto' }">
 		<view class="tui-status-bar" :style="{ height: statusBarHeight + 'px' }" v-if="isImmersive"></view>
-		<!-- <view class="tui-header-icon" v-if="!arrowHidden"> -->
-			<!-- <tui-icon name="arrowleft" :size="arrowIconSize" :color="opacity > 0.85 ? '#fff' : '#333'" @click="backPage()"></tui-icon> -->
-			<icon class="iconfont icon-arrowleft" :style="{color: '#fff', fontSize: arrowIconSize + 'px'}" v-if="!arrowHidden" @click="backPage()"></icon>
-		<!-- </view> -->
-		<view class="tui-navigation_bar-title"
-			:style="{ opacity: transparent || opacity >= maxOpacity ? 1 : opacity, color: color, fontSize: fontSize, paddingTop: top - statusBarHeight + 'px' }"
-			v-if="title && !isCustom">
-			{{ title }}
+		<view class="tui-bar-wrapper">
+			<tui-icon class="arrow" name="arrowleft" :size="arrowIconSize" color="#fff" v-if="!arrowHidden" @click="backPage()"></tui-icon>
+			<!-- <icon class="iconfont icon-arrowleft" :style="{color: '#fff', fontSize: arrowIconSize + 'px', paddingTop: top - statusBarHeight + 'px'}" v-if="!arrowHidden" @click="backPage()"></icon> -->
+			<view class="tui-navigation_bar-title"
+				:style="{ opacity: transparent || opacity >= maxOpacity ? 1 : opacity, color: color, fontSize: fontSize, paddingTop: top - statusBarHeight + 'px' }"
+				v-if="title && !isCustom">
+				{{ title }}
+			</view>
 		</view>
 		<slot></slot>
 	</view>
@@ -24,7 +24,7 @@
 			// 返回箭头图标大小
 			arrowIconSize: {
 				type: Number,
-				default: 28
+				default: 30
 			},
 			// 隐藏返回箭头
 			arrowHidden: {
@@ -246,39 +246,20 @@
 		width: 100%;
 	}
 
-	// .tui-header-icon {
-	// 	position: absolute;
-	// 	width: 32px;
-    // height: 40px;
-    // display: flex;
-    // align-items: center;
-    // justify-content: center;
-    // margin-left: 10px;
-		// display: flex;
-    	// height: 60%;
-    	// align-items: center;
-		// margin: 0px 6px 0px;
-		/* display: inline-block;
-		width: 36px;
-		height: 36px;
-		line-height: 36px;
-		margin: 6px 6px 0px;
-		text-align: center; */
-		/* #ifndef H5 */
-		/* cursor: pointer; */
-		/* #endif */
-		
-	// }
 	.icon-arrowleft {
 		position: absolute;
-		font-size: 26px;
-		display: inline-block;
-		width: 72rpx;
-		height: 72rpx;
-		line-height: 72rpx;
-		text-align: center;
-		margin-top: 16rpx;
-		margin-left: 30rpx;
+		font-size: 28px;
+		width: 32px;
+		height: 32px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-left: 12px;
+	}
+
+	.tui-bar-wrapper{
+		width: 100%;
+		height: 100%;
 	}
 
 	.tui-navigation_bar-title {

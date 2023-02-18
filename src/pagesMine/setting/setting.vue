@@ -7,8 +7,11 @@
 			</tui-navigation-bar>
 		</view>
         <view class="content-container">
-            setting
-            <tui-button @click="toSetting()">跳转到setting</tui-button>
+            <tui-list-view title="带箭头，有点击效果" color="#777">
+                <tui-list-cell arrow>
+                    带箭头，有点击效果
+                </tui-list-cell>
+            </tui-list-view>
         </view>
     </view>
 </template>

@@ -5,12 +5,14 @@ import commonJs from './static/js/common.js'
 import tuiIcon from "@/components/thorui/tui-icon/tui-icon.vue"
 import tuiButton from '@/components/thorui/tui-button/tui-button.vue'
 import tuiNavigationBar from '@/components/thorui/tui-navigation-bar/tui-navigation-bar.vue'
+import tuiListCell from '@/components/thorui/tui-list-cell/tui-list-cell.vue'
 import tabbar from '@/components/tabbar/tab-bar-curtain.vue'
 import zPaging from '@/components/z-paging/z-paging.vue'
 
 Vue.component('tui-icon', tuiIcon)
 Vue.component('tui-button', tuiButton)
 Vue.component('tui-navigation-bar', tuiNavigationBar)
+Vue.component('tui-list-cell', tuiListCell)
 Vue.component('tab-bar', tabbar)
 Vue.component('z-paging', zPaging)
 

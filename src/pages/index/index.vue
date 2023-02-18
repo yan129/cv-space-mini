@@ -2,7 +2,7 @@
 	<view class="main-container">
 		<view :style="{height: headerBarHeight + 'px'}">
 			<tui-navigation-bar @init="initNavigation($event)" @change="opacityChange($event)" :isOpacity="false" title="猿空间"
-				:backgroundColor="themeStyles.themeBackgroundColor" color="#FFF" fontSize="32rpx" :scrollTop="64"
+				:backgroundColor="themeStyles.themeBackgroundColor" color="#FFF" fontSize="32rpx" :scrollTop="0"
 				:arrowHidden="true">
 			</tui-navigation-bar>
 		</view>
